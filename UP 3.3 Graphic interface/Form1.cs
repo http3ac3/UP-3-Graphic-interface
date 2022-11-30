@@ -1,47 +1,46 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace UP_3._3_Graphic_interface
 {
     public partial class Form1 : Form
     {
-        static void Function(double x, out double y) => y = x * x * x - Math.Sin(x);
         public Form1()
         {
             InitializeComponent();
         }
+        static void Function(double x, double a, out double y) => y = (x < a) ? 0 : (x > a) ? (x - a) / (x + a) : 1;
 
         private void GetTableButton_Click(object sender, EventArgs e)
         {
             AnswerBox.Text = "";
+
             if (!double.TryParse(AValueBox.Text, out double a))
             {
-                AnswerBox.Text = "В поле значения а введены недопустимые данные!";
+                AnswerBox.Text = "В поле а введены недопустимые значения!";
                 return;
             }
 
             if (!double.TryParse(BValueBox.Text, out double b))
             {
-                AnswerBox.Text = "В поле значения b введены недопустимые данные!";
+                AnswerBox.Text = "В поле а введены недопустимые значения!";
                 return;
             }
 
-            Function(a, out double f_a);
-            Function(b, out double f_b);
+            if (!double.TryParse(HValueBox.Text, out double h))
+            {
+                AnswerBox.Text = "В поле а введены недопустимые значения!";
+                return;
+            }
 
-            AnswerBox.Text += $"В точке а ({a}) значение функции равно {f_a}\n";
-
-            AnswerBox.Text += $"В точке b ({b}) значение функции равно {f_b}\n";
-
-            AnswerBox.Text += (f_a > f_b) ? "Значение фунции в точке а больше чем в точке b" : (f_a < f_b) ?
-                "Значение фунции в точке b больше чем в точке a" : "Значение фунции в точке b и в точке a равны";
+            AnswerBox.Text += "Таблица значений\n";
+            AnswerBox.Text += "x\t|\ty\n"; AnswerBox.Text += "===============\n";
+            for (double x = a; x <= b; x += h)
+            {
+                Function(x, a, out double y);
+                AnswerBox.Text += $"{x}\t|\t{y}\n";
+            }
         }
+
     }
 }
