@@ -23,13 +23,13 @@ namespace UP_3._3_Graphic_interface
 
             if (!double.TryParse(BValueBox.Text, out double b))
             {
-                AnswerBox.Text = "В поле а введены недопустимые значения!";
+                AnswerBox.Text = "В поле b введены недопустимые значения!";
                 return;
             }
 
             if (!double.TryParse(HValueBox.Text, out double h))
             {
-                AnswerBox.Text = "В поле а введены недопустимые значения!";
+                AnswerBox.Text = "В поле h введены недопустимые значения!";
                 return;
             }
 
