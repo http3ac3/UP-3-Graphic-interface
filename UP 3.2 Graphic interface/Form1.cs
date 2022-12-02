@@ -13,21 +13,22 @@ namespace UP_3._2_Graphic_interface
 
         private void GetTableButton_Click(object sender, EventArgs e)
         {
+            double a, b, h;
             AnswerBox.Text = "";
 
-            if (!double.TryParse(AValueBox.Text, out double a))
+            if (!double.TryParse(AValueBox.Text, out a))
             {
                 AnswerBox.Text = "В поле а введены недопустимые значения!";
                 return;
             }
 
-            if (!double.TryParse(BValueBox.Text, out double b))
+            if (!double.TryParse(BValueBox.Text, out b))
             {
                 AnswerBox.Text = "В поле b введены недопустимые значения!";
                 return;
             }
 
-            if (!double.TryParse(HValueBox.Text, out double h))
+            if (!double.TryParse(HValueBox.Text, out h))
             {
                 AnswerBox.Text = "В поле h введены недопустимые значения!";
                 return;
@@ -35,8 +36,12 @@ namespace UP_3._2_Graphic_interface
 
             AnswerBox.Text += "Таблица значений\n";
             AnswerBox.Text += "x\t|\ty\n"; AnswerBox.Text += "===============\n";
-            for (double x = a; x <= b; x += h)
+
+            var count = (int)(Math.Ceiling(b - a) / h + 1);
+
+            for (var i = 0; i < count; i++)
             {
+                var x = a + i * h;
                 AnswerBox.Text += $"{x}\t|\t{Function(x, a)}\n";
             }
         }
